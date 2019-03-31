@@ -22,13 +22,7 @@ class Card extends Component {
     componentDidMount(){
      
         let curCard = this.props.card
-        this.setState({card:{
-            name:curCard.name,
-            hp:curCard.hp,
-            id:curCard.id
-        //  weak:parseInt(curCard.weaknesses[0].value.replace('x','')),
-
-        }})
+       
     }
     render() {
         let img = this.props.card.imageUrl;
@@ -36,12 +30,13 @@ class Card extends Component {
         return (
              
             <div style = {
-                {  
-                    minWidth: '50%',
+                {   margin:'5px 5px 5px 5px',
+                    minWidth: '45%',
                     minHeight: '150px',
                     display: 'flow',
                     flexFlow:'row',
-                    background: '#555555'
+                    background: '#555555',
+                    border:'5px',
                 }
             } >
                 <img style={{
@@ -51,7 +46,7 @@ class Card extends Component {
                     padLeft:'5px'
                 }} src={img} ></img>
 
-                <div id={`${this.state.card.id}-add-detail`}
+                <div id={`${this.props.card.id}-add-detail`}
                 style = {
                     {  width:'70%',
                        display:'inline block'
@@ -59,7 +54,7 @@ class Card extends Component {
                    
                 }>
                     <ul style={{listStyle: 'none'}}>
-                       <li>{this.state.card.name}</li>
+                       <li>{this.props.card.name}</li>
                     </ul>
                 </div>
                 <div style={

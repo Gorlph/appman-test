@@ -6,61 +6,62 @@ import {
     removeCard
 } from '../actions';
 import { connect } from 'react-redux';
+import { throws } from 'assert';
 class Card extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-           card:{name:'',
-            hp:0,
-
-            weak:0,
-            damage:0,
-            happiness:0
-            },
-            id:''
-        }
+        
+         
     }
     componentDidMount(){
      
-        let curCard = this.props.card
-        // this.setState({card:{
-        //     hp:curCard.hp,
-        //  weak:parseInt(curCard.weaknesses[0].value.replace('x','')),
 
-        // }})
     }
     render() {
         let img = this.props.card.imageUrl;
+        let cardObj = {
+            name:this.props.card.name,
+            id:this.props.card.id
+        }
         let cardID = this.props.card.id;
+        let name = this.props.card.name;
+  
         return (
              
             <div style = {
-                {
+                {  
                     minWidth: '50%',
+                    // maxWidth:'50%',
+                    border:'3px',
                     minHeight: '150px',
-                    display: 'block',
+                    maxHeight:'210px',
+                    display: 'flow',
+                    flexFlow:'row',
                     background: '#555555'
                 }
             } >
-                <img style={{
+                 <img       onClick={this.props.hideModal}
+                 style={{
+                     float:'left',
                     maxWidth:'150px',
-                    display:'inline block'
+                    display:'inline block',
+                    padLeft:'5px'
                 }} src={img} ></img>
 
-                <div
+                <div       onClick={this.props.hideModal}
+                id={`${this.props.card.id}-remove-detail`}
                 style = {
                     {  width:'70%',
                        display:'inline block'
                     }
                    
                 }>
-                    <ul>
-                        {Object.keys(this.state.card).forEach((key,index)=>{
-                            `${key}: ${this.state.card[key]}`
-                        })}
+                    <ul style={{listStyle: 'none'}}>
+                       <li>{this.props.card.name}</li>
                     </ul>
                 </div>
-                <div style={
+                <div 
+                style={
                     {
                         textAlign:'right',
                         display:'inline block'
@@ -78,8 +79,8 @@ class Card extends Component {
         )
 
     }
-    addCard = () => {
-      
+    addCard = (e) => {
+      this.props.hideModal(e);
         let dispatch = this.props.dispatch
         // console.log(push(this.props.char))
         dispatch(removeCard(this.props.card))

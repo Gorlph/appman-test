@@ -1,13 +1,17 @@
+#root {
+    width:1024px;
+    height:768px;
+}
 header{
     font-family: Atma;
     font-size: 70px;
     text-align:  center;
 }
 #footer {
-    position: relative;
-    left: 0;
-    /* bottom: -650px; */
-    width: 100%;
+    position: absolute;
+    left: 5px;
+    bottom: 103px;
+    width: 1024px;
     background-color: red;
     color: white;
     text-align: center;

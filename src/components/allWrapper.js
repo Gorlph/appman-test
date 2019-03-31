@@ -12,23 +12,33 @@ class AllWrapper extends Component {
       showModal:false
     };
   }
-  componentDidUpdate(){
+  componentDidMount(){
+    document.addEventListener('mousedown',(e)=>{
+      console.log(e)
+      // if(e.target.id==='MainWrap'){
+      //   this.hideModal();
+      // }
+    },false)
 
   }
   render() {
     console.log('app',this.props)
     return (
-     <div style={{
+ 
+     <div 
+     onClick={this.hideModal}
+     id="MainWrap" style={{
          position:'relative',
          overflow:'scroll',
-         minHeight:'100%',
-         height:'100%',
-         minHeight:'650px'
+         height:'768px',
+
+        maxHeight:'768px'
+    
      }}
      >
-      <DexFieldWrapper  onClick={this.hideModal}/>
+      <DexFieldWrapper  hideModal={this.hideModal}/>
         <Modal
-         onClick={this.hideModal}
+        //  onClick={this.hideModal}
           show={this.state.showModal}
           existingCard={this.props.existingCard}
           cards={this.props.cards}
@@ -47,13 +57,21 @@ class AllWrapper extends Component {
     )
   }
   hideModal = (e) => {
-    e.preventDefault();
-    this.setState({showModal:false})
+    // e.preventDefault();
+    console.log('set hide modal')
+    if(e.target.id==='MainWrap' ||e.target.id==='modalWrapper'
+    || e.target.id==='listModal' 
+    ){
+      this.setState({showModal:false})
+    }
   }
-  showModal = () => {
+  showModal = (e) => {
     console.log('dispatch!')
+    e.preventDefault();
 
-   this.setState({showModal:true})
+      this.setState({showModal:true})
+  
+
   }
 }
 const mapState= (state)=>{

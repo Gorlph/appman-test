@@ -13,21 +13,24 @@ class DexField extends Component {
     let cards = this.props.cards.map(card=>{
                    
         return (
-            <CardRemove card={card}/>
+            <CardRemove  hideModal={this.props.hideModal} card={card}/>
 
         )
     })
    
     return (
-     <div style={{
+     <div id="DexList" style={{
          width:'100%',
          height:'100%',
-         zIndex:-1,
+         maxHeight:'653px',
+   
          display:'flex',
          flexFlow:'row wrap',
          overflow:'scroll',
         //  position:'absolute'
-     }}>
+     }}
+     
+     >
      {cards}
      </div>
     );

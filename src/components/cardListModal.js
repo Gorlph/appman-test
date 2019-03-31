@@ -15,26 +15,27 @@ class Modal extends Component {
         }
     }
     render(){
-        console.log('/////////////////')
-        console.log(this.props,'modal')
-        // let img = this.props.card.imageUrl;
-        // let cardID = this.props.card.id;
-        // let cardName = this.props.card.name;
-        
-            let cards =  this.props.cards.map(card=>{
-                   
+
+            let cards =  this.props.cards.map(card=>{       
                 return (
                     <Card card={card}/>
-    
                 )
             })
            
             return(
-                <div 
+                <div id="modalWrapper"
                 style={
-                    {
+                    {   position:'absolute',
+                        maxWidth:'1000px',
+                        minHeight:'600px',
+                        // top:'500px',
+                        // left:'200px',
+                        overflow:'scroll'
+                        ,
                         display:this.props.show?'block':'none',
                         alignContent:'center',
+                        zIndex:100
+                        
                     }
                 }
                 >
@@ -44,13 +45,16 @@ class Modal extends Component {
                 }
                     value={this.state.searchValue} onChange={this.searchChange}></input>
                 <div id="listModal" style={
-                    {maxWidth :'90%',
-                    maxHeight:'600px',
+                    {left:'50px',
+                        maxWidth :'90%',
+                    minWidth:'800px',
+                    minHeight:'597px',
+                    maxHeight:'597px',
                     overflow:'scroll',
                     display:'flex',
                     paddingLeft:'50px',
                     flexFlow:'row wrap',
-                    background:'#555555',
+                    background:'#d2f596',
                     zIndex:100
                    
                     
@@ -71,10 +75,11 @@ class Modal extends Component {
         
     }
     searchChange=async(e)=>{
-        console.log('value,',e.value);
-        this.setState({searchValue:e.value});
+        let value = e.target.value
+        console.log('value,',value);
+        this.setState({searchValue:value});
         let url = 'http://localhost:3030/api/cards'
-        let cardsPromise = axios.get('http://localhost:3030/api/cards?name='+e.value);
+        let cardsPromise = axios.get('http://localhost:3030/api/cards?name='+value);
         let cards = await cardsPromise;
         console.log('cards in searcxh',cards)
         let exist = this.props.existingCard

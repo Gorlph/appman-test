@@ -10,8 +10,21 @@ class DexFieldWrapper extends Component {
     }
   }
   render() {
-    return (<div id="dexfieldwrapper" onClick={this.props.onClick}>
-      <DexField   cards={this.props.cards}></DexField>
+    return (<div id="dexfieldwrapper" onClick={this.props.hideModal}
+    style={
+      {
+        position:'absolute',
+        width:'100%',
+        height:'500px',
+        
+        // zIndex:-4,
+        overflow:'scroll',
+        background:'#123445'
+      }
+    }
+    
+    >
+      <DexField hideModal={this.props.hideModal}   cards={this.props.cards}></DexField>
     </div>
     )
   }
