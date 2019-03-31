@@ -1,0 +1,37 @@
+The explanations about some details of a card are very confusing. They are Strength, Weakness and Damage.
+
+
+    HP level calculation maximum is 100. if value is higher than 100 set it to 100, otherwise 0.
+    Strength level calculation multiply by 50, maximum is 100. e.g. if value is 1 set it to 50, 2 set it to 100, otherwise 0.
+    Weakness level calculation multiply by 100, maximum is 100. e.g. if value is 1 set it to 100, otherwise 0.
+    Damage calculation attacks damage value without symbol. e.g. 50+ set it to 50, 20* set it to 20, otherwise 0.
+    Happiness level calculation ((hp / 10) + (damage /10 ) + 10 - (weak)) / 5
+
+
+Pikachu {
+  name: 'Pikachu',
+  hp: 110,
+  attacks: [
+    { name: 'attack A', damage: '20+'},
+    { name: 'attack B', damage: '40x'}
+  ],
+  weaknesses: [
+    { name: 'weakness A'},
+  ]
+}
+
+Output {
+  hp: 100,
+  atk: '100%',
+  weak: '50%',
+  damage: 60,
+  level: 5
+}
+
+The only way I can make sense out of this example is that I am supposed to multiply 50 to the length of attacks array to get atk, 100 to the length of weaknesses array to get weak,
+and take the sum of the damage of each attack into damage.
+
+I would like to suggest to change the description of str, damage and weak to this:
+"Strength level calculation: multiply the number of attacks by 50, maximum is 100. e.g. if the number of attacks is 1 set it to 50, 2 set it to 100, otherwise 0.
+Weakness level: multiply the number of weaknesses by 100, maximum is 100. e.g. if value is 1 set it to 100, otherwise 0.
+Damage calculation calculation: sum the damage of every attack without a trailing symbol. e.g. 50+ set it to 50, 20* set it to 20, otherwise 0."
