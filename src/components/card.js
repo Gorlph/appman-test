@@ -25,13 +25,21 @@ class Card extends Component {
        
     }
     render() {
+        console.log(this.props.card)
         let img = this.props.card.imageUrl;
         let cardID = this.props.card.id;
+        let name = this.props.card.name;
+        let str = this.props.card.attacks
+        let cardObj = {
+            name,
+            str
+           
+        }
         return (
              
             <div style = {
                 {   margin:'5px 5px 5px 5px',
-                    minWidth: '45%',
+                    minWidth: '90%',
                     minHeight: '150px',
                     display: 'flow',
                     flexFlow:'row',
@@ -54,7 +62,15 @@ class Card extends Component {
                    
                 }>
                     <ul style={{listStyle: 'none'}}>
-                       <li>{this.props.card.name}</li>
+                        {
+                            Object.keys(cardObj).map(key =>
+                                (<li>
+                                {`${key}:${cardObj[key]}`}
+                                </li>
+                                )
+                            )
+                        }
+                       {/* <li>{this.props.card.name}</li> */}
                     </ul>
                 </div>
                 <div style={

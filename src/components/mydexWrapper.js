@@ -15,7 +15,7 @@ class DexFieldWrapper extends Component {
       {
         position:'absolute',
         width:'100%',
-        height:'500px',
+        height:'625px',
         
         // zIndex:-4,
         overflow:'scroll',
