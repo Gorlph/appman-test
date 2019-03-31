@@ -19,13 +19,30 @@ class Card extends Component {
     }
     render() {
         let img = this.props.card.imageUrl;
-        let cardObj = {
-            name:this.props.card.name,
-            id:this.props.card.id
-        }
-        let cardID = this.props.card.id;
         let name = this.props.card.name;
-  
+        let hp = Math.max(100,parseInt(this.props.card.hp))
+        let str = Math.min(this.props.card.attacks.length*50,100)
+        let weakness = Math.min(this.props.card.weaknesses.length*100,100)
+        let numReg = /([0-9]+)/
+        let damage = Math.min(100,this.props.card.attacks.reduce((accu,redu)=>{
+            console.log(redu.damage);
+            if(redu.damage.length===0){
+                return accu;
+            }
+            console.log(parseInt(numReg.exec(redu.damage)))
+            return accu+ parseInt(numReg.exec(redu.damage));
+
+        },0));
+        let happy = ((hp/10)+(damage/10)+10-weakness)/5
+        let cardObj = {
+            name,
+            hp,
+            str,
+            weakness,
+            damage,
+            happy
+           
+        }
         return (
              
             <div style = {
@@ -56,8 +73,16 @@ class Card extends Component {
                     }
                    
                 }>
-                    <ul style={{listStyle: 'none'}}>
-                       <li>{this.props.card.name}</li>
+                     <ul style={{listStyle: 'none'}}>
+                        {
+                            Object.keys(cardObj).map(key =>
+                                (<li>
+                                {`${key}:${cardObj[key]}`}
+                                </li>
+                                )
+                            )
+                        }
+                       {/* <li>{this.props.card.name}</li> */}
                     </ul>
                 </div>
                 <div 
